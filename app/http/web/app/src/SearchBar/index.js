@@ -91,7 +91,7 @@ class SearchBar extends React.Component {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search for your OOS project on Github + Press Enter"
+                placeholder="Search for Projects"
                 onKeyPress={this.props.onSearch}
                 classes={{
                   root: classes.inputRoot,
