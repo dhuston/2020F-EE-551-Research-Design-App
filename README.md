@@ -3,6 +3,6 @@ Research design refers to the overall strategy that a scientist uses to integrat
 
 Steps:
 1. Define Goals
-2. Design Study
+2. Define Cohorts
 3. Design Analysis
 4. Publish Results
