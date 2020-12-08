@@ -154,9 +154,7 @@ export default function MiniDrawer() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>
-        The Research Design App is used for defining the overall strategy for integrating different 
-        components of a study in a coherent and logical way, thereby, ensuring we effectively address 
-        the research problem; it constitutes the blueprint for the collection, measurement, and analysis of data.
+        Welcome to the Research Design App!
         </Typography>
       </main>
     </div>
