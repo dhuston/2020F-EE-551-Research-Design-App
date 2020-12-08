@@ -4,12 +4,28 @@ import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import GithubRepo from "../GithubRepo"
-import SearchBar from "../SearchBar"
+import NavBar from "../NavBar"
 
 import githubClient from '../githubClient'
 import APIClient from '../apiClient'
+
 
 const styles = theme => ({
   root: {
@@ -103,7 +119,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className={styles.root}>
-        <SearchBar onSearch={this.onSearch} />
+        <NavBar onSearch={this.onSearch} />
         <Tabs
           value={this.state.value}
           onChange={this.handleTabChange}
@@ -111,8 +127,8 @@ class Home extends React.Component {
           textColor="primary"
           variant="fullWidth"
         >
-          <Tab label="Kudos" />
-          <Tab label="Search" />
+          <Tab label="Goals" />
+          <Tab label="Datasets" />
         </Tabs>
       
         <SwipeableViews
