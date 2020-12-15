@@ -4,16 +4,10 @@ import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 
-import GithubRepo from "../GithubRepo"
 import NavBar from "../NavBar"
+import Studies from "../Studies"
 
-// import githubClient from '../githubClient'
 import APIClient from '../apiClient'
 
 
