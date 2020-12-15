@@ -18,6 +18,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 import PeopleIcon from '@material-ui/icons/People';
+import { Link } from 'react-router-dom';
+
 
 const drawerWidth = 240;
 
@@ -142,12 +144,28 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['Goals', 'Studies', 'Analyses', 'Datasets'].map((text, index) => (
+          {/* {['Goals', 'Studies', 'Analyses', 'Datasets'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 3 === 0 ? <AssignmentIcon /> : <PeopleIcon />}</ListItemIcon>
               <ListItemText primary={text} />
-            </ListItem>
-          ))}
+            </ListItem> */}
+          {/* ))} */}
+          <ListItem button key='Goals' component={Link} to="/Goals">
+            <ListItemIcon> <AssignmentIcon /> </ListItemIcon>
+            <ListItemText primary='Goals' />
+          </ListItem>
+          <ListItem button key='Studies' component={Link} to="/Studies">
+            <ListItemIcon> <PeopleIcon /> </ListItemIcon>
+            <ListItemText primary='Studies' />
+          </ListItem>
+          <ListItem button key='Analyses' component={Link} to="/Analyses">
+            <ListItemIcon> <InsertChartIcon /> </ListItemIcon>
+            <ListItemText primary='Analyses' />
+          </ListItem>
+          <ListItem button key='Datasets' component={Link} to="/Datasets">
+            <ListItemIcon> <ChevronRightIcon /> </ListItemIcon>
+            <ListItemText primary='Datasets' />
+          </ListItem>
         </List>
         <Divider />
       </Drawer>

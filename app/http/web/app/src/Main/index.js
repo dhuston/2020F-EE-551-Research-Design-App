@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect, BrowserRouter as Router } from 'react-router-dom'
 
 import Home from '../Home'
+import Goals from '../Goals'
 
 class Main extends Component {
   render() {
@@ -11,6 +12,7 @@ class Main extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/" component={Home} />
+            <Route path="/goals" component={Goals} />
           </Switch>
       </Router>
     );
