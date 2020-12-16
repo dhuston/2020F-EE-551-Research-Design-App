@@ -11,7 +11,7 @@ class Repository(object):
   def create(self, research):
     return self.client.create(research)
   
-  def update(self, selector, kudo):
+  def update(self, selector, research):
     return self.client.update(selector, research)
   
   def delete(self, selector):

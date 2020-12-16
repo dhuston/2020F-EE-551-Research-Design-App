@@ -17,7 +17,7 @@ class MongoRepository(object):
   def create(self, research):
     return self.db.researchinsert_one(research)
 
-  def update(self, selector, kudo):
+  def update(self, selector, research):
     return self.db.research.replace_one(selector, research).modified_count
  
   def delete(self, selector):
