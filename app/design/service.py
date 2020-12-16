@@ -1,6 +1,6 @@
 from ..repository import Repository
 from ..repository.mongo import MongoRepository
-from .schema import Researchchema
+from .schema import ResearchSchema
 
 class Service(object):
   def __init__(self, user_id, repo_client=Repository(adapter=MongoRepository)):
@@ -12,28 +12,28 @@ class Service(object):
 
   def find_all_research(self):
     research  = self.repo_client.find_all({'user_id': self.user_id})
-    return [self.dump(kudo) for kudo in research]
+    return [self.dump(research) for research in research]
 
-  def find_kudo(self, repo_id):
-    kudo = self.repo_client.find({'user_id': self.user_id, 'repo_id': repo_id})
-    return self.dump(kudo)
+  def find_research(self, repo_id):
+    research = self.repo_client.find({'user_id': self.user_id, 'repo_id': repo_id})
+    return self.dump(research)
 
-  def create_kudo_for(self, githubRepo):
-    self.repo_client.create(self.prepare_kudo(githubRepo))
+  def create_research_for(self, githubRepo):
+    self.repo_client.create(self.prepare_research(githubRepo))
     return self.dump(githubRepo.data)
 
-  def update_kudo_with(self, repo_id, githubRepo):
-    records_affected = self.repo_client.update({'user_id': self.user_id, 'repo_id': repo_id}, self.prepare_kudo(githubRepo))
+  def update_research_with(self, repo_id, githubRepo):
+    records_affected = self.repo_client.update({'user_id': self.user_id, 'repo_id': repo_id}, self.prepare_research(githubRepo))
     return records_affected > 0
 
-  def delete_kudo_for(self, repo_id):
+  def delete_research_for(self, repo_id):
     records_affected = self.repo_client.delete({'user_id': self.user_id, 'repo_id': repo_id})
     return records_affected > 0
 
   def dump(self, data):
-    return researchchema(exclude=['_id']).dump(data).data
+    return researchSchema(exclude=['_id']).dump(data).data
 
-  def prepare_kudo(self, githubRepo):
+  def prepare_research(self, githubRepo):
     data = githubRepo.data
     data['user_id'] = self.user_id
     return data
