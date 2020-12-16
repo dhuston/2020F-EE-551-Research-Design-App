@@ -14,16 +14,16 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, indication, investigator) {
-  return { name, indication, investigator};
+function createData(name, goal, indication, investigator) {
+  return {name, goal, indication, investigator};
 }
 
 const rows = [
   createData('Mechanisms of resistance', 'Lung', 'Dr. Daniel Huston'),
   createData('Tumor micro environment', 'Melanoma', 'Dr. John Huston'),
   createData('Oncogenesis', 'Multiple', 'Dr. Andrew Huston'),
-  createData('Cupcake', 'Breast', 'Dr. Catherine Huston'),
-  createData('Gingerbread', 'Prostate', 'Dr. Joan Huston'),
+  createData('Virology', 'Breast', 'Dr. Catherine Huston'),
+  createData('Hematopoietic', 'Prostate', 'Dr. Joan Huston'),
 ];
 
 export default function BasicTable() {
@@ -34,7 +34,7 @@ export default function BasicTable() {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Research Goal</TableCell>
+            <TableCell align="right">Research Goal</TableCell>
             <TableCell align="right">Indication</TableCell>
             <TableCell align="right">Investigator</TableCell>
           </TableRow>
@@ -45,6 +45,7 @@ export default function BasicTable() {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
+              <TableCell align="right">{row.goal}</TableCell>
               <TableCell align="right">{row.indication}</TableCell>
               <TableCell align="right">{row.investigator}</TableCell>
             </TableRow>

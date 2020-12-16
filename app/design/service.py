@@ -1,6 +1,6 @@
 from ..repository import Repository
 from ..repository.mongo import MongoRepository
-from .schema import KudoSchema
+from .schema import Researchchema
 
 class Service(object):
   def __init__(self, user_id, repo_client=Repository(adapter=MongoRepository)):
@@ -10,9 +10,9 @@ class Service(object):
     if not user_id:
       raise Exception("user id not provided")
 
-  def find_all_kudos(self):
-    kudos  = self.repo_client.find_all({'user_id': self.user_id})
-    return [self.dump(kudo) for kudo in kudos]
+  def find_all_research(self):
+    research  = self.repo_client.find_all({'user_id': self.user_id})
+    return [self.dump(kudo) for kudo in research]
 
   def find_kudo(self, repo_id):
     kudo = self.repo_client.find({'user_id': self.user_id, 'repo_id': repo_id})
@@ -31,7 +31,7 @@ class Service(object):
     return records_affected > 0
 
   def dump(self, data):
-    return KudoSchema(exclude=['_id']).dump(data).data
+    return researchchema(exclude=['_id']).dump(data).data
 
   def prepare_kudo(self, githubRepo):
     data = githubRepo.data

@@ -1,12 +1,11 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
 
+
 import NavBar from "../NavBar"
-import Studies from "../Studies"
+import Goals from "../Goals"
 
 import APIClient from '../apiClient'
 
@@ -14,11 +13,11 @@ import APIClient from '../apiClient'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginTop: 30
+    marginTop: 5
   },
   paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
+    padding: theme.spacing(1),
+    textAlign: 'right',
     color: theme.palette.text.secondary,
   },
 });
@@ -76,17 +75,17 @@ class Home extends React.Component {
     }
   }
 
-  onSearch = (event) => {
+  onNav = (event) => {
     const target = event.target;
     if (!target.value || target.length < 3) { return }
     if (event.which !== 13) { return }
 
-    githubClient(target.value)
-      .then((response) => {
-        target.blur();
-        this.setState({ ...this.state, value: 1 });
-        this.resetRepos(response.items);
-      })
+    // githubClient(target.value)
+    //   .then((response) => {
+    //     target.blur();
+    //     this.setState({ ...this.state, value: 1 });
+    //     this.resetRepos(response.items);
+    //   })
   }
   
   renderRepos = (repos) => {
@@ -103,7 +102,19 @@ class Home extends React.Component {
   render() {
     return (
       <div className={styles.root}>
-        <NavBar onSearch={this.onSearch} />
+        <NavBar onNav={this.onNav} />
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleTabChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="ullWidth"
+        >
+          {/* <Tab label="Goals" />
+          <Tab label="Datasets" /> */}
+        </Tabs>
+
+        <Goals onNav={this.onNav} />
         <Tabs
           value={this.state.value}
           onChange={this.handleTabChange}
@@ -111,11 +122,10 @@ class Home extends React.Component {
           textColor="primary"
           variant="fullWidth"
         >
-          <Tab label="Goals" />
-          <Tab label="Datasets" />
+
         </Tabs>
       
-        <SwipeableViews
+        {/* <SwipeableViews
           axis={'x-reverse'}
           index={this.state.value}
           onChangeIndex={this.handleTabChangeIndex}
@@ -126,7 +136,7 @@ class Home extends React.Component {
           <Grid container spacing={10} style={{padding: '20px 0'}}>
             { this.renderRepos(this.state.repos) }
           </Grid>
-        </SwipeableViews>
+        </SwipeableViews> */}
       </div>
     );
   }
