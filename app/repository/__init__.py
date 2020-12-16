@@ -8,11 +8,11 @@ class Repository(object):
   def find(self, selector):
     return self.client.find(selector)
  
-  def create(self, kudo):
-    return self.client.create(kudo)
+  def create(self, research):
+    return self.client.create(research)
   
   def update(self, selector, kudo):
-    return self.client.update(selector, kudo)
+    return self.client.update(selector, research)
   
   def delete(self, selector):
     return self.client.delete(selector)
