@@ -1,145 +1,176 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Grid from '@material-ui/core/Grid';
+import clsx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import InsertChartIcon from '@material-ui/icons/InsertChart';
+import { Link } from 'react-router-dom';
+import StorageIcon from '@material-ui/icons/Storage';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
+import Goals from "../goals"
 
-import NavBar from "../NavBar"
-// import Goals from "../Goals"
+const drawerWidth = 240;
 
-import APIClient from '../apiClient'
-
-
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'flex',
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: 36,
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9) + 1,
+    },
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
+  content: {
     flexGrow: 1,
-    marginTop: 5
+    padding: theme.spacing(3),
   },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: 'right',
-    color: theme.palette.text.secondary,
-  },
-});
+}));
 
-class Home extends React.Component {
-  state = {
-    value: 0,
-    repos: [],
-    kudos: []
+export default function MiniDrawer() {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(true);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
   };
 
-  // async componentDidMount() {
-    // const accessToken = await this.props.authService.getAccessToken()
-    // this.apiClient = new APIClient();
-    // this.apiClient.getKudos().then((data) =>
-    //   this.setState({...this.state, kudos: data})
-    // );
-  // }
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
-  // handleTabChange = (event, value) => {
-  //   this.setState({ value });
-  // };
-
-  // handleTabChangeIndex = index => {
-  //   this.setState({ value: index });
-  // };
-
-  // resetRepos = repos => this.setState({ ...this.state, repos })
-
-  // isKudo = repo => this.state.kudos.find(r => r.id === repo.id)
-  //   onKudo = (repo) => {
-  //     this.updateBackend(repo);
-  // }
-
-  // updateBackend = (repo) => {
-  //   if (this.isKudo(repo)) {
-  //     this.apiClient.deleteKudo(repo);
-  //   } else {
-  //     this.apiClient.createKudo(repo);
-  //   }
-  //   this.updateState(repo);
-  // }
-
-  // updateState = (repo) => {
-  //   if (this.isKudo(repo)) {
-  //     this.setState({
-  //       ...this.state,
-  //       kudos: this.state.kudos.filter( r => r.id !== repo.id )
-  //     })
-  //   } else {
-  //     this.setState({
-  //       ...this.state,
-  //       kudos: [repo, ...this.state.kudos]
-  //     })
-  //   }
-  // }
-
-  onNav = (event) => {
-    const target = event.target;
-    if (!target.value || target.length < 3) { return }
-    if (event.which !== 13) { return }
-
-    // githubClient(target.value)
-    //   .then((response) => {
-    //     target.blur();
-    //     this.setState({ ...this.state, value: 1 });
-    //     this.resetRepos(response.items);
-    //   })
-  }
-  
-  // renderRepos = (repos) => {
-  //   if (!repos) { return [] }
-  //   return repos.map((repo) => {
-  //     return (
-  //       <Grid item xs={12} md={3} key={repo.id}>
-  //         <GithubRepo onKudo={this.onKudo} isKudo={this.isKudo(repo)} repo={repo} />
-  //       </Grid>
-  //     );
-  //   })
-  // }
-
-  render() {
-    return (
-      <div className={styles.root}>
-        <NavBar onNav={this.onNav} />
-        <Tabs
-          value={this.state.value}
-          onChange={this.handleTabChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-        >
-          {/* <Tab label="Goals" />
-          <Tab label="Datasets" /> */}
-        </Tabs>
-
-        {/* <Goals onNav={this.onNav} />
-        <Tabs
-          value={this.state.value}
-          onChange={this.handleTabChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-        > */}
-
-        {/* </Tabs> */}
-      
-        {/* <SwipeableViews
-          axis={'x-reverse'}
-          index={this.state.value}
-          onChangeIndex={this.handleTabChangeIndex}
-        >
-          <Grid container spacing={10} style={{padding: '20px 0'}}>
-            { this.renderRepos(this.state.kudos) }
-          </Grid>
-          <Grid container spacing={10} style={{padding: '20px 0'}}>
-            { this.renderRepos(this.state.repos) }
-          </Grid>
-        </SwipeableViews> */}
-      </div>
-    );
-  }
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, {
+              [classes.hide]: open,
+            })}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h5" noWrap>
+            Research Design App
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
+        }}
+      >
+        <div className={classes.toolbar}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          <ListItem button key='Goals' component={Link} to="/goals">
+            <ListItemIcon> <AssignmentIcon /> </ListItemIcon>
+            <ListItemText primary='Goals' />
+          </ListItem>
+          <ListItem button key='Studies' component={Link} to="/studies">
+            <ListItemIcon> <AssignmentIndIcon /> </ListItemIcon>
+            <ListItemText primary='Studies' />
+          </ListItem>
+          <ListItem button key='Analyses' component={Link} to="/analyses">
+            <ListItemIcon> <InsertChartIcon /> </ListItemIcon>
+            <ListItemText primary='Analyses' />
+          </ListItem>
+          <ListItem button key='Datasets' component={Link} to="/datasets">
+            <ListItemIcon> <StorageIcon /> </ListItemIcon>
+            <ListItemText primary='Datasets' />
+          </ListItem>
+        </List>
+        <Divider />
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <Typography paragraph>
+        Welcome to the Research Design App!
+        </Typography>
+      </main>
+    </div>
+  );
 }
-
-export default withStyles(styles)(Home);

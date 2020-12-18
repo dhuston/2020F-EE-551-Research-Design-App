@@ -16,9 +16,11 @@ class AnalysisSchema(Schema):
   analysis_name = fields.Str()
   analysis_analyst = fields.Str()
   analysis_type= fields.Str()
-class DatasetSchema(Schema):
+class ResultSchema(Schema):
   id = fields.Int(required=True)
-  dataset_name = fields.Str()
-  dataset_owner = fields.Str()
-  dataset_type = fields.Str()
-  dataset_location = fields.Str()
+  result_name = fields.Str()
+  result_pi = fields.Str()
+  result_description = fields.Str()
+  result_findings = fields.Str()
+  result_followup = fields.Str()
+  result_impact = fields.Str()

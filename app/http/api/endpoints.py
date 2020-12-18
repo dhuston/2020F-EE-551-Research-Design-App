@@ -21,7 +21,7 @@ def index():
 @app.route("/designs", methods=["POST"])
 @oidc.accept_token(True)
 def create():
-  research_design = GithubRepoSchema().load(json.loads(request.data))
+  research_design = GoalSchema().load(json.loads(request.data))
   
   if research_design.errors:
     return json_response({'error': research_design.errors}, 422)
@@ -44,7 +44,7 @@ def show(research_id):
 @app.route("/design/<int:research_id>", methods=["PUT"])
 @oidc.accept_token(True)
 def update(research_id):
-   research_design = GithubRepoSchema().load(json.loads(request.data))
+   research_design = GoalSchema().load(json.loads(request.data))
   
    if research_design.errors:
      return json_response({'error': research_design.errors}, 422)

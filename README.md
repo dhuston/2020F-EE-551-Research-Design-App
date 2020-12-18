@@ -3,10 +3,15 @@ Research design refers to the overall strategy that a scientist uses to integrat
 
 Steps:
 1. Define Goals
-2. Define Studies
-3. Report Analyses
-4. Publish Dataset
+2. Design Studies
+3. Plan Analyses
+4. Publish Result
 
+## User Stories
+As a research scientist I want to define the goals of a research project
+As a research scientist I want to design a study around one or more research goals
+As a research scientist I want to plan one or more analyses for a given study
+As a research scientist I want to publish one or more result for a given analysis
 
 ## Available Scripts
 In the app directory, you can run:

@@ -3,7 +3,7 @@ from ..repository.mongo import MongoRepository
 from .schema import GoalSchema
 from .schema import StudySchema
 from .schema import AnalysisSchema
-from .schema import DatasetSchema
+from .schema import ResultSchema
 
 class Service(object):
   def __init__(self, user_id, research_client=Repository(adapter=MongoRepository)):
