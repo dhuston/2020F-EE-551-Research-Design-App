@@ -1,7 +1,7 @@
 from flask_oidc import OpenIDConnect
 from flask import Flask, json, g, request
 from app.design.service import Service as design
-from app.design.schema import GoalSchema
+from app.design.schema import GithubRepoSchema
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -12,28 +12,28 @@ app.config.update({
 oidc = OpenIDConnect(app)
 CORS(app)
 
-@app.route("/design", methods=["GET"])
+@app.route("/designs", methods=["GET"])
 @oidc.accept_token(True)
 def index():
-  return json_response(design(g.oidc_token_info['sub']).find_all_design())
+  return json_response(design(g.oidc_token_info['sub']).find_all_designs())
 
 
-@app.route("/design", methods=["POST"])
+@app.route("/designs", methods=["POST"])
 @oidc.accept_token(True)
 def create():
-  goal = GoalSchema().load(json.loads(request.data))
+  research_design = GithubRepoSchema().load(json.loads(request.data))
   
-  if goal.errors:
-    return json_response({'error': goal.errors}, 422)
+  if research_design.errors:
+    return json_response({'error': research_design.errors}, 422)
 
-  design = design(g.oidc_token_info['sub']).create_design_for(goal)
+  design = design(g.oidc_token_info['sub']).create_design_for(research_design)
   return json_response(design)
 
 
-@app.route("/design/<int:repo_id>", methods=["GET"])
+@app.route("/design/<int:research_id>", methods=["GET"])
 @oidc.accept_token(True)
-def show(repo_id):
-  design = design(g.oidc_token_info['sub']).find_design(repo_id)
+def show(research_id):
+  design = design(g.oidc_token_info['sub']).find_design(research_id)
 
   if design:
     return json_response(design)
@@ -41,26 +41,26 @@ def show(repo_id):
     return json_response({'error': 'design not found'}, 404)
 
 
-@app.route("/design/<int:repo_id>", methods=["PUT"])
+@app.route("/design/<int:research_id>", methods=["PUT"])
 @oidc.accept_token(True)
-def update(repo_id):
-   goal = GoalSchema().load(json.loads(request.data))
+def update(research_id):
+   research_design = GithubRepoSchema().load(json.loads(request.data))
   
-   if goal.errors:
-     return json_response({'error': goal.errors}, 422)
+   if research_design.errors:
+     return json_response({'error': research_design.errors}, 422)
 
    design_service = design(g.oidc_token_info['sub'])
-   if design_service.update_design_with(repo_id, goal):
-     return json_response(goal.data)
+   if design_service.update_design_with(research_id, research_design):
+     return json_response(research_design.data)
    else:
      return json_response({'error': 'design not found'}, 404)
 
 
-@app.route("/design/<int:repo_id>", methods=["DELETE"])
+@app.route("/design/<int:research_id>", methods=["DELETE"])
 @oidc.accept_token(True)
-def delete(repo_id):
+def delete(research_id):
   design_service = design(g.oidc_token_info['sub'])
-  if design_service.delete_design_for(repo_id):
+  if design_service.delete_design_for(research_id):
     return json_response({})
   else:
     return json_response({'error': 'design not found'}, 404)

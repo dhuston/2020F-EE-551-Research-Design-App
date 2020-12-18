@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom';
 import StorageIcon from '@material-ui/icons/Storage';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
-import Goals from "../Goals"
+import Goals from "../goals"
 
 const drawerWidth = 240;
 
@@ -146,19 +146,19 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          <ListItem button key='Goals' component={Link} to="/Goals">
+          <ListItem button key='Goals' component={Link} to="/goals">
             <ListItemIcon> <AssignmentIcon /> </ListItemIcon>
             <ListItemText primary='Goals' />
           </ListItem>
-          <ListItem button key='Studies' component={Link} to="/Studies">
+          <ListItem button key='Studies' component={Link} to="/studies">
             <ListItemIcon> <AssignmentIndIcon /> </ListItemIcon>
             <ListItemText primary='Studies' />
           </ListItem>
-          <ListItem button key='Analyses' component={Link} to="/Analyses">
+          <ListItem button key='Analyses' component={Link} to="/analyses">
             <ListItemIcon> <InsertChartIcon /> </ListItemIcon>
             <ListItemText primary='Analyses' />
           </ListItem>
-          <ListItem button key='Datasets' component={Link} to="/Datasets">
+          <ListItem button key='Datasets' component={Link} to="/datasets">
             <ListItemIcon> <StorageIcon /> </ListItemIcon>
             <ListItemText primary='Datasets' />
           </ListItem>
