@@ -12,16 +12,16 @@ class APIClient {
     this.accessToken = accessToken;
   }
 
-  createKudo(repo) {
-    return this.perform('post', '/kudos', repo);
+  createResearch(design) {
+    return this.perform('post', '/backend', design);
   }
 
-  deleteKudo(repo) {
-    return this.perform('delete', `/kudos/${repo.id}`);
+  deleteResearch(design) {
+    return this.perform('delete', `/backend/${design.id}`);
   }
 
-  getKudos() {
-    return this.perform('get', '/kudos');
+  getResearch() {
+    return this.perform('get', '/backend');
   }
 
   async perform (method, resource, data) {
