@@ -8,10 +8,10 @@ Steps:
 4. Publish Result
 
 ## User Stories
-###### As a research scientist I want to define the goals of a research project
-###### As a research scientist I want to design a study around one or more research goals
-###### As a research scientist I want to plan one or more analyses for a given study
-###### As a research scientist I want to publish one or more result for a given analysis
+1. As a research scientist I want to define the goals of a research project
+2. As a research scientist I want to design a study around one or more research goals
+3. As a research scientist I want to plan one or more analyses for a given study
+4. As a research scientist I want to publish one or more result for a given analysis
 
 ## Available Scripts
 In the app directory, you can run:
