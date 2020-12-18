@@ -8,7 +8,7 @@ The organization and use of Research Information within an R&D organization is a
 ## Proposed Solution:
 Research design as a concept refers to the overall strategy that a scientist uses to integrate the different components of a study in a coherent and logical way, with the goal to ensure they will effectively address a research problem. It is the blueprint for data analyses. I propose the creation of a Research Design Web App. It will be a web portal that allows scientists to construct, enter and connect their research plans into a simple user interface that others can find.
 
-The tech stack will be Python, Flask and React on top of a mongodb.
+The tech stack is Python, Flask and React on top of a MongoDB.
 
 Steps:
 1. Define Goals
