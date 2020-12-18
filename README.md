@@ -14,7 +14,7 @@ Steps:
 1. Define Goals
 2. Design Studies
 3. Plan Analyses
-4. Publish Result
+4. Publish Results
 
 ## User Stories
 1. As a research scientist I want to define the goals of a research project
