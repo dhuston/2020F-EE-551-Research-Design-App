@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
 import StorageIcon from '@material-ui/icons/Storage';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
+import Goals from "../Goals"
 
 const drawerWidth = 240;
 

@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 
 import NavBar from "../NavBar"
-import Goals from "../Goals"
+// import Goals from "../Goals"
 
 import APIClient from '../apiClient'
 
@@ -29,51 +29,51 @@ class Home extends React.Component {
     kudos: []
   };
 
-  async componentDidMount() {
+  // async componentDidMount() {
     // const accessToken = await this.props.authService.getAccessToken()
     // this.apiClient = new APIClient();
     // this.apiClient.getKudos().then((data) =>
     //   this.setState({...this.state, kudos: data})
     // );
-  }
+  // }
 
-  handleTabChange = (event, value) => {
-    this.setState({ value });
-  };
+  // handleTabChange = (event, value) => {
+  //   this.setState({ value });
+  // };
 
-  handleTabChangeIndex = index => {
-    this.setState({ value: index });
-  };
+  // handleTabChangeIndex = index => {
+  //   this.setState({ value: index });
+  // };
 
-  resetRepos = repos => this.setState({ ...this.state, repos })
+  // resetRepos = repos => this.setState({ ...this.state, repos })
 
-  isKudo = repo => this.state.kudos.find(r => r.id === repo.id)
-    onKudo = (repo) => {
-      this.updateBackend(repo);
-  }
+  // isKudo = repo => this.state.kudos.find(r => r.id === repo.id)
+  //   onKudo = (repo) => {
+  //     this.updateBackend(repo);
+  // }
 
-  updateBackend = (repo) => {
-    if (this.isKudo(repo)) {
-      this.apiClient.deleteKudo(repo);
-    } else {
-      this.apiClient.createKudo(repo);
-    }
-    this.updateState(repo);
-  }
+  // updateBackend = (repo) => {
+  //   if (this.isKudo(repo)) {
+  //     this.apiClient.deleteKudo(repo);
+  //   } else {
+  //     this.apiClient.createKudo(repo);
+  //   }
+  //   this.updateState(repo);
+  // }
 
-  updateState = (repo) => {
-    if (this.isKudo(repo)) {
-      this.setState({
-        ...this.state,
-        kudos: this.state.kudos.filter( r => r.id !== repo.id )
-      })
-    } else {
-      this.setState({
-        ...this.state,
-        kudos: [repo, ...this.state.kudos]
-      })
-    }
-  }
+  // updateState = (repo) => {
+  //   if (this.isKudo(repo)) {
+  //     this.setState({
+  //       ...this.state,
+  //       kudos: this.state.kudos.filter( r => r.id !== repo.id )
+  //     })
+  //   } else {
+  //     this.setState({
+  //       ...this.state,
+  //       kudos: [repo, ...this.state.kudos]
+  //     })
+  //   }
+  // }
 
   onNav = (event) => {
     const target = event.target;
@@ -88,16 +88,16 @@ class Home extends React.Component {
     //   })
   }
   
-  renderRepos = (repos) => {
-    if (!repos) { return [] }
-    return repos.map((repo) => {
-      return (
-        <Grid item xs={12} md={3} key={repo.id}>
-          <GithubRepo onKudo={this.onKudo} isKudo={this.isKudo(repo)} repo={repo} />
-        </Grid>
-      );
-    })
-  }
+  // renderRepos = (repos) => {
+  //   if (!repos) { return [] }
+  //   return repos.map((repo) => {
+  //     return (
+  //       <Grid item xs={12} md={3} key={repo.id}>
+  //         <GithubRepo onKudo={this.onKudo} isKudo={this.isKudo(repo)} repo={repo} />
+  //       </Grid>
+  //     );
+  //   })
+  // }
 
   render() {
     return (
@@ -108,22 +108,22 @@ class Home extends React.Component {
           onChange={this.handleTabChange}
           indicatorColor="primary"
           textColor="primary"
-          variant="ullWidth"
+          variant="fullWidth"
         >
           {/* <Tab label="Goals" />
           <Tab label="Datasets" /> */}
         </Tabs>
 
-        <Goals onNav={this.onNav} />
+        {/* <Goals onNav={this.onNav} />
         <Tabs
           value={this.state.value}
           onChange={this.handleTabChange}
           indicatorColor="primary"
           textColor="primary"
           variant="fullWidth"
-        >
+        > */}
 
-        </Tabs>
+        {/* </Tabs> */}
       
         {/* <SwipeableViews
           axis={'x-reverse'}
