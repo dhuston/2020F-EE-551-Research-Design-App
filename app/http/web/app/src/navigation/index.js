@@ -17,11 +17,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
-import { Link } from 'react-router-dom';
 import StorageIcon from '@material-ui/icons/Storage';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
+
 import Goals from "../goals"
+import Analyses from '../analyses'
+import Studies from '../studies'
+import Results from '../results'
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -144,7 +148,6 @@ export default function MiniDrawer() {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
-        <Divider />
         <List>
           <ListItem button key='Goals' component={Link} to="/goals">
             <ListItemIcon> <AssignmentIcon /> </ListItemIcon>
@@ -158,18 +161,19 @@ export default function MiniDrawer() {
             <ListItemIcon> <InsertChartIcon /> </ListItemIcon>
             <ListItemText primary='Analyses' />
           </ListItem>
-          <ListItem button key='Datasets' component={Link} to="/datasets">
+          <ListItem button key='Results' component={Link} to="/results">
             <ListItemIcon> <StorageIcon /> </ListItemIcon>
-            <ListItemText primary='Datasets' />
+            <ListItemText primary='Results' />
           </ListItem>
         </List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph>
-        Welcome to the Research Design App!
-        </Typography>
+        <ListItem button key='Goals' component={Goals} to="/goals">
+            <ListItemIcon> <AssignmentIcon /> </ListItemIcon>
+            <ListItemText primary='Goals' />
+          </ListItem>
       </main>
     </div>
   );

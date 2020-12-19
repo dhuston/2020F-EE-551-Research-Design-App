@@ -23,17 +23,14 @@ const useRowStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein, price) {
+function createData(name, indication, investigator) {
   return {
     name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      { date: '2020-01-05', customerId: '11091700', amount: 3 },
-      { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
+    indication,
+    investigator,
+    description: [
+      { date: '2020-01-05', description: 'Understand Cancer Resistance'},
+      { date: '2020-01-02', description: 'Secondary Analysis'},
     ],
   };
 }
@@ -54,38 +51,30 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell align="right">{row.indication}</TableCell>
+        <TableCell align="right">{row.investigator}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                History
+                Analyses
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell>Analysis Date</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                  {row.description.map((descriptionRow) => (
+                    <TableRow key={descriptionRow.date}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {descriptionRow.date}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
+                      <TableCell>{descriptionRow.description}</TableCell>
+                      <TableCell align="right">{descriptionRow.amount}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -100,28 +89,28 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
+    indication: PropTypes.string.isRequired,
+    carbs: PropTypes.string.isRequired,
+    investigator: PropTypes.string.isRequired,
+    description: PropTypes.arrayOf(
       PropTypes.shape({
         amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,
       }),
     ).isRequired,
     name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
+    protein: PropTypes.string.isRequired,
   }).isRequired,
 };
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
+  createData('Understand Cancer Resistance on patients with combination therapy', 'Lung', 'Dr. Daniel Huston'),
+  createData('Understand COVID-19 Spike Protein', 'Infectious Diseases', 'Dr. John Huston'),
+  createData('Double Blinded Study ', '262', 'Dr. Andrew Huston'),
+  createData('See if heart rate is correlated with sleep disorders', 'Neurology', 'Dr. Catherine Huston'),
+  createData('Understand the Tumor Microenvironment of Patients with Melanoma on mono', 'Melanoma', 'Dr. Joab Huston'),
 ];
 
 export default function CollapsibleTable() {
@@ -131,11 +120,9 @@ export default function CollapsibleTable() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Goal Name</TableCell>
+            <TableCell align="right">Indication</TableCell>
+            <TableCell align="right">Investigator</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
