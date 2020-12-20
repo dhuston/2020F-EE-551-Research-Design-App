@@ -170,10 +170,10 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <ListItem button key='Goals' component={Goals} to="/goals">
+        {/* <ListItem button key='Goals' component={Goals} to="/goals">
             <ListItemIcon> <AssignmentIcon /> </ListItemIcon>
             <ListItemText primary='Goals' />
-          </ListItem>
+          </ListItem> */}
       </main>
     </div>
   );
