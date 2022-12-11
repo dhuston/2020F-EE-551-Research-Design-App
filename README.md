@@ -10,7 +10,7 @@ Research design as a concept refers to the overall strategy that a scientist use
 
 The tech stack is Python, Flask and React on top of a MongoDB.
 
-Features:
+## Features:
 1. Define Goals
 2. Design Studies
 3. Plan Analyses
